@@ -1,4 +1,4 @@
-namespace Library.DataAccess.Entities;
+namespace Library.Domain.Entities;
 
 public class Book
 {

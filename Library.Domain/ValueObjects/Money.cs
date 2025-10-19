@@ -1,4 +1,4 @@
-namespace Library.DataAccess.ValueObjects;
+namespace Library.Domain.ValueObjects;
 
 public class Money : IEquatable<Money>
 {

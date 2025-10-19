@@ -1,8 +1,9 @@
-using Library.DataAccess.Data;
-using Library.DataAccess.Entities;
+using Library.Application.Repositories;
+using Library.Domain.Entities;
+using Library.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Library.DataAccess.Repositories;
+namespace Library.Infrastructure.Repositories;
 
 public class BookRepository : Repository<Book>, IBookRepository
 {
@@ -28,6 +29,13 @@ public class BookRepository : Repository<Book>, IBookRepository
     {
         return await Entities
             .FirstOrDefaultAsync(b => b.ISBN == isbn);
+    }
+
+    public async Task<List<Book>> GetAllWithAuthorsAsync(CancellationToken cancellationToken)
+    {
+        return await Entities
+            .Include(b => b.Author)
+            .ToListAsync(cancellationToken);
     }
 
     private ApplicationDbContext ApplicationDbContext => (ApplicationDbContext)Context;

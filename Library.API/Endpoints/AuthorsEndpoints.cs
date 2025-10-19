@@ -1,5 +1,5 @@
-using Library.BusinessLayer.Authors.Queries;
-using Library.BusinessLayer.Dtos;
+using Library.Application.Authors.Queries;
+using Library.Application.Dtos;
 using MediatR;
 
 namespace Library.API.Endpoints;

@@ -1,7 +1,8 @@
 using System.Linq.Expressions;
+using Library.Application.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace Library.DataAccess.Repositories;
+namespace Library.Infrastructure.Repositories;
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 {

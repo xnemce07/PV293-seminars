@@ -1,8 +1,8 @@
 using System.Security.Claims;
-using Library.DataAccess.Constants;
-using Library.DataAccess.ValueObjects;
+using Library.Domain.Constants;
+using Library.Domain.ValueObjects;
 
-namespace Library.DataAccess.Entities;
+namespace Library.Domain.Entities;
 
 public class Loan
 {

@@ -2,12 +2,12 @@ using System.Text;
 using FluentValidation;
 using Library.API.Endpoints;
 using Library.API.Middleware;
-using Library.BusinessLayer.Books.Commands;
-using Library.BusinessLayer.Middleware;
-using Library.DataAccess.Constants;
-using Library.DataAccess.Data;
-using Library.DataAccess.Entities;
-using Library.DataAccess.Repositories;
+using Library.Application.Books.Commands;
+using Library.Application.Repositories;
+using Library.Domain.Entities;
+using Library.Infrastructure.Data;
+using Library.Infrastructure.Middleware;
+using Library.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -109,6 +109,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<ILoanRepository, LoanRepository>();
+builder.Services.AddScoped<IUserRepository, ApplicationUserRepository>();
 
 // Register FluentValidation
 builder.Services.AddValidatorsFromAssemblyContaining<CreateBookCommand>();

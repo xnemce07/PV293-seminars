@@ -1,8 +1,7 @@
 using System.Security.Claims;
-using Library.BusinessLayer.Loans.Commands;
-using Library.DataAccess.Constants;
-using Library.DataAccess.Entities;
-using Library.DataAccess.ValueObjects;
+using Library.Application.Loans.Commands;
+using Library.Domain.Constants;
+using Library.Domain.ValueObjects;
 using MediatR;
 
 namespace Library.API.Endpoints;

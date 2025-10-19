@@ -1,6 +1,6 @@
-using Library.BusinessLayer.Auth.Commands;
-using Library.BusinessLayer.Auth.Queries;
-using Library.DataAccess.Constants;
+using Library.Application.Auth.Commands;
+using Library.Application.Auth.Queries;
+using Library.Domain.Constants;
 using MediatR;
 
 namespace Library.API.Endpoints;

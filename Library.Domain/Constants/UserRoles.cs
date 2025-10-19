@@ -1,4 +1,4 @@
-namespace Library.DataAccess.Constants;
+namespace Library.Domain.Constants;
 
 public static class UserRoles
 {

@@ -1,7 +1,7 @@
-using Library.BusinessLayer.Books.Commands;
-using Library.BusinessLayer.Books.Queries;
-using Library.BusinessLayer.Dtos;
-using Library.DataAccess.Constants;
+using Library.Application.Books.Commands;
+using Library.Application.Books.Queries;
+using Library.Application.Dtos;
+using Library.Domain.Constants;
 using MediatR;
 
 namespace Library.API.Endpoints;

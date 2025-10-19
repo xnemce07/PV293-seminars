@@ -1,9 +1,9 @@
-using Library.DataAccess.Constants;
-using Library.DataAccess.Entities;
+using Library.Domain.Constants;
+using Library.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Library.DataAccess.Data;
+namespace Library.Infrastructure.Data;
 
 public static class ApplicationDbInitializer
 {

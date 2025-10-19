@@ -1,6 +1,6 @@
-﻿using Library.DataAccess.Constants;
-using Library.DataAccess.Entities;
-using Library.DataAccess.ValueObjects;
+﻿using Library.Domain.Constants;
+using Library.Domain.Entities;
+using Library.Domain.ValueObjects;
 using System.Reflection;
 using System.Security.Claims;
 

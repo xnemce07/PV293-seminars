@@ -1,8 +1,9 @@
-using Library.DataAccess.Data;
-using Library.DataAccess.Entities;
+using Library.Application.Repositories;
+using Library.Domain.Entities;
+using Library.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Library.DataAccess.Repositories;
+namespace Library.Infrastructure.Repositories;
 
 public class LoanRepository : Repository<Loan>, ILoanRepository
 {
