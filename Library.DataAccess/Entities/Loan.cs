@@ -171,7 +171,22 @@ public class Loan
     /// </summary>
     public void ReportDamage(string damageDescription, Money damageCost)
     {
-        throw new NotImplementedException();
+        if(IsCompleted() || IsLost())
+        {
+            throw new InvalidOperationException("Cannot report damage on completed or lost loan");
+        }
+
+        if (string.IsNullOrEmpty(damageDescription))
+        {
+            throw new ArgumentException("Damage description cannnot be empty");
+        }
+
+        if(damageCost.Amount <= 0)
+        {
+            throw new ArgumentException("Damage cost must be a positive value");
+        }
+
+        AddFine(FineType.DamageFee, damageCost, damageDescription);
     }
 
 
@@ -225,6 +240,7 @@ public class Loan
     public bool IsActive() => Status == LoanStatus.Active;
     public bool IsReturned() => Status == LoanStatus.Returned || Status == LoanStatus.Completed;
     public bool IsCompleted() => Status == LoanStatus.Completed;
+    public bool IsLost() => Status == LoanStatus.Lost;
     public bool IsOverdue() => Status == LoanStatus.Active && DateTime.UtcNow > DueDate;
     public int GetDaysOverdue() => IsOverdue() ? (DateTime.UtcNow - DueDate).Days : 0;
     public int GetLoanDuration() => (ReturnDate ?? DateTime.UtcNow).Subtract(LoanDate).Days;

@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Library.BusinessLayer.Loans.Commands;
 using Library.DataAccess.Constants;
 using Library.DataAccess.Entities;
+using Library.DataAccess.ValueObjects;
 using MediatR;
 
 namespace Library.API.Endpoints;
@@ -26,6 +27,14 @@ public static class LoansEndpoints
         loans.MapPost("/{loanId:guid}/extend", ExtendLoan)
             .WithName("ExtendLoan")
             .Accepts<ExtendLoanRequest>("application/json")
+            .Produces(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .RequireAuthorization(policy => policy
+                .RequireRole(UserRoles.Member, UserRoles.Librarian, UserRoles.Admin));
+
+        loans.MapPost("/{loanId:guid}/report-damage", ReportDamage)
+            .WithName("ReportDamage")
+            .Accepts<ReportDamageRequest>("application/json")
             .Produces(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .RequireAuthorization(policy => policy
@@ -57,7 +66,21 @@ public static class LoansEndpoints
             ExtendDurationDays = request.ExtendDurationdays
         };
 
-        var id = await mediator.Send(command);
+        await mediator.Send(command);
+        return Results.Ok();
+    }
+
+    private static async Task<IResult> ReportDamage(Guid loanId, ReportDamageRequest request, IMediator mediator)
+    {
+        var command = new ReportDamageCommand
+        {
+            LoanId = loanId,
+            DamageDescription = request.DamageDescription ?? "",
+            DamageCost = Money.Create(request.DamageCostAmount ?? 0, request.DamageCostCurrency ?? "")
+
+        };
+
+        await mediator.Send(command);
         return Results.Ok();
     }
 }
@@ -72,4 +95,11 @@ public record CheckOutBookRequest
 public record ExtendLoanRequest
 {
     public int ExtendDurationdays { get; init; }
+}
+
+public record ReportDamageRequest
+{
+    public string? DamageDescription { get; init; }
+    public decimal? DamageCostAmount { get; init; }
+    public string? DamageCostCurrency { get; init; }
 }

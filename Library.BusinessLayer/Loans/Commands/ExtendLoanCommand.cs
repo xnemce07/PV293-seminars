@@ -26,9 +26,9 @@ namespace Library.BusinessLayer.Loans.Commands
         {
             var loan = await loanRepository.GetByIdAsync(request.LoanId);
 
-            loan.ExtendDueDate(request.ExtendDurationDays);
+            loan?.ExtendDueDate(request.ExtendDurationDays);
 
-            return loan.Id;
+            return loan?.Id ?? Guid.Empty;
         }
     }
 }
