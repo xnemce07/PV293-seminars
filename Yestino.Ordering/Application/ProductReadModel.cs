@@ -7,5 +7,5 @@ public record ProductReadModel
     public required string Description { get; init; }
     public decimal Price { get; init; }
     public string? ImageUrl { get; init; }
-    public int StockQuantity { get; init; }
+    public int StockQuantity { get; set; }
 }
