@@ -10,9 +10,9 @@ using Yestino.Warehouse.Infrastructure;
 
 namespace Yestino.Warehouse.Features.EventHandlers;
 
-public static class ChangeQuantityOnOrderCancelHandler
+public static class eleaseQuantityOnOrderCancelledHandler
 {
-    public static void handle(CancelOrder domainEvent, WarehouseDbContext dbContext)
+    public static void Handle(OrderCancelled domainEvent, WarehouseDbContext dbContext)
     {
         foreach(var orderItem in domainEvent.Items){
             var item = dbContext.Items.First(i => i.CatalogId == orderItem.ProductId);

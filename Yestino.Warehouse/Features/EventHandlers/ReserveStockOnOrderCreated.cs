@@ -10,7 +10,7 @@ namespace Yestino.Warehouse.Features.EventHandlers;
 
 public static class ReserveStockOnOrderCreatedHandler
 {
-    public static void handle(OrderCreated domainEvent, WarehouseDbContext context)
+    public static void Handle(OrderCreated domainEvent, WarehouseDbContext context)
     {
         foreach (var orderItem in domainEvent.Items)
         {

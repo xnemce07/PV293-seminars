@@ -7,4 +7,7 @@ using Yestino.Common.Domain;
 
 namespace Yestino.OrderingContracts.DomainEvents;
 
-public record CancelOrder(Guid OrderId, ICollection<OrderCreatedItem> Items) : DomainEvent(OrderId);
+public record OrderCancelled(Guid OrderId, ICollection<OrderCancelledItem> Items) : DomainEvent(OrderId);
+
+
+public record OrderCancelledItem(Guid ProductId, int Quantity);

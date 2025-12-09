@@ -13,13 +13,7 @@ public class WarehouseItem : AggregateRoot
     public string Name { get; private set; }
 
     private int _totalQuantity;
-    public int TotalQuantity {
-        get => _totalQuantity;
-        set {
-            _totalQuantity = value; 
-            this.RaiseDomainEvent(new WarehouseAvailableStockChanged(this.CatalogId, this.AvailableQuantity));
-        }
-    }
+    public int TotalQuantity { get; private set; }
     public int ReservedQuantity { get; set; }
     public int AvailableQuantity => TotalQuantity - ReservedQuantity;
 
@@ -36,6 +30,12 @@ public class WarehouseItem : AggregateRoot
         };
 
         return item;
+    }
+
+    public void AddQuantity(int quantity)
+    {
+        this.TotalQuantity += quantity;
+        this.RaiseDomainEvent(new WarehouseAvailableStockChanged(this.CatalogId, this.AvailableQuantity));
     }
 
     public void ChangeReservedStock(int difference)

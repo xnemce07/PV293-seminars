@@ -11,7 +11,7 @@ namespace Yestino.Warehouse.Features.EventHandlers;
 
 public static class CreateWarehouseItemOnProductCreatedHandler
 {
-    public static void handle(ProductCreated domainEvent, WarehouseDbContext dbContext)
+    public static void Handle(ProductCreated domainEvent, WarehouseDbContext dbContext)
     {
         var warehouseItem = WarehouseItem.Create(
             catalogId: domainEvent.AggregateId,

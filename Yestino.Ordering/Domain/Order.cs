@@ -44,16 +44,14 @@ public class Order : AggregateRoot
         return order;
     }
 
-    public void cancelOrder()
+    public void CancelOrder()
     {
         this.Status = OrderStatus.Cancelled;
         this.RaiseDomainEvent(
-            new CancelOrder(
+            new OrderCancelled(
                 OrderId: this.Id,
-                Items: this.Items.Select(i => new OrderCreatedItem(
+                Items: this.Items.Select(i => new OrderCancelledItem(
                     ProductId: i.ProductId,
-                    ProductName: i.ProductName,
-                    Price: i.Price,
                     Quantity: i.Quantity
                 )).ToList()));
     }
