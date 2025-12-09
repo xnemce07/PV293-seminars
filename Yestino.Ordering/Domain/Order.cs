@@ -43,7 +43,21 @@ public class Order : AggregateRoot
 
         return order;
     }
+
+    public void CancelOrder()
+    {
+        this.Status = OrderStatus.Cancelled;
+        this.RaiseDomainEvent(
+            new OrderCancelled(
+                OrderId: this.Id,
+                Items: this.Items.Select(i => new OrderCancelledItem(
+                    ProductId: i.ProductId,
+                    Quantity: i.Quantity
+                )).ToList()));
+    }
 }
+
+public record CreateOrderItemModel(Guid ProductId, int Quantity, decimal Price, string ProductName);
 
 public enum OrderStatus
 {
@@ -53,5 +67,3 @@ public enum OrderStatus
     Delivered,
     Cancelled
 }
-
-public record CreateOrderItemModel(Guid ProductId, int Quantity, decimal Price, string ProductName);

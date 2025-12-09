@@ -7,6 +7,15 @@ public static class CreateOrderCommandHandler
 {
     public static Guid Handle(CreateOrderCommand command, OrderingDbContext dbContext)
     {
+
+        foreach (var item in command.Items)
+        {
+            if (item.Quantity > dbContext.ProductReadModels.First(p => p.Id == item.ProductId).StockQuantity)
+            {
+                throw new InvalidOperationException($"Not enough stock for product {item.ProductId}");
+            }
+        }
+
         var order = Order.Create(
             command.CustomerAddress,
             command.Items
